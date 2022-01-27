@@ -3,18 +3,127 @@
 // Author: DustyPriest 24/01/2022
 
 // GLOBAL VARIABLES
-const ROUNDS = 5;
 let playerScore = 0,
-  computerScore = 0;
+  compScore = 0;
+
+const playerScoreEl = document.querySelector('#player-score');
+const compScoreEl = document.querySelector('#comp-score');
+const options = document.querySelectorAll('.btn');
+const commentary = document.querySelector('.commentary');
+
+options.forEach((option) => option.addEventListener('click', pickOption));
+
+function pickOption(e) {
+  playRound(e.target.id);
+  updateScores();
+  checkWinner();
+}
+
+// Updates DOM
+function updateScores() {
+  playerScoreEl.textContent = playerScore;
+  compScoreEl.textContent = compScore;
+}
+
+// Check for win state
+function checkWinner() {
+  if (playerScore === 5 || compScore === 5) {
+    alert(`${playerScore === 5 ? 'Player' : 'Computer'} wins!`);
+    resetGame();
+  }
+}
+
+function resetGame() {
+  playerScore = 0;
+  compScore = 0;
+  updateScores();
+  commentary.textContent = '';
+}
+
+// Generate computer move
+function computerPlay() {
+  let move = Math.floor(Math.random() * 3);
+
+  switch (move) {
+    case 0:
+      // console.log('Computer picked Rock');
+      return 'rock';
+    case 1:
+      // console.log('Computer picked Paper');
+      return 'paper';
+    case 2:
+      // console.log('Computer picked Scissors');
+      return 'scissors';
+  }
+}
+
+// Evaluate computer move vs player move
+function playRound(playerSelection) {
+  playerSelection = playerSelection.toLowerCase().trim();
+  computerSelection = computerPlay();
+
+  if (playerSelection === 'rock') {
+    switch (computerSelection) {
+      case 'rock':
+        commentary.textContent = 'Tie! Rock vs Rock';
+        break;
+      case 'paper':
+        compScore++;
+        commentary.textContent = 'You Lose! Paper beats Rock';
+        break;
+      case 'scissors':
+        playerScore++;
+        commentary.textContent = 'You Win! Rock beats Scissors';
+        break;
+      default:
+        alert('Oh no! Something went wrong.');
+        resetGame();
+    }
+  } else if (playerSelection === 'paper') {
+    switch (computerSelection) {
+      case 'rock':
+        playerScore++;
+        commentary.textContent = 'You Win! Paper beats Rock';
+        break;
+      case 'paper':
+        commentary.textContent = 'You Tie! Paper vs Paper';
+        break;
+      case 'scissors':
+        compScore++;
+        commentary.textContent = 'You Lose! Scissors beat Paper';
+        break;
+      default:
+        alert('Oh no! Something went wrong.');
+        resetGame();
+    }
+  } else {
+    switch (computerSelection) {
+      case 'rock':
+        compScore++;
+        commentary.textContent = 'You Lose! Rock beats Scissors';
+        break;
+      case 'paper':
+        playerScore++;
+        commentary.textContent = 'You Win! Scissors beat Paper';
+        break;
+      case 'scissors':
+        commentary.textContent = 'You Tie! Scissors vs Scissors';
+        break;
+      default:
+        alert('Oh no! Something went wrong.');
+        resetGame();
+    }
+  }
+}
 
 // Game manager - Plays ROUNDS rounds
-function game() {
+/* function game() {
   console.log('ROCK, PAPER, SCISSORS!');
 
   for (let i = 1, playerSelection; i <= ROUNDS; i++) {
     playerSelection = prompt('Rock, Paper, Scissors! Which will you choose? ');
 
-    console.log(playRound(playerSelection, computerPlay()));
+    console.log(playRound(playerSelection));
     console.log(
       `Round ${i} Results:\nPlayer: ${playerScore} Computer: ${computerScore}`
     );
@@ -27,64 +136,6 @@ function game() {
   } else {
     alert('A TIE?!?! Incredible!');
   }
-}
+ }*/
 
-// Generate computer move
-function computerPlay() {
-  let move = Math.floor(Math.random() * 3);
-
-  switch (move) {
-    case 0:
-      console.log('Computer picked Rock');
-      return 'Rock';
-    case 1:
-      console.log('Computer picked Paper');
-      return 'Paper';
-    case 2:
-      console.log('Computer picked Scissors');
-      return 'Scissors';
-  }
-}
-
-// Evaluate computer move vs player move
-function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase().trim();
-  computerSelection = computerSelection.toLowerCase().trim();
-
-  if (playerSelection === 'rock') {
-    switch (computerSelection) {
-      case 'rock':
-        return 'You Tie! Rock vs Rock';
-      case 'paper':
-        computerScore++;
-        return 'You Lose! Paper beats Rock';
-      case 'scissors':
-        playerScore++;
-        return 'You Win! Rock beats Scissors';
-    }
-  } else if (playerSelection === 'paper') {
-    switch (computerSelection) {
-      case 'rock':
-        playerScore++;
-        return 'You Win! Paper beats Rock';
-      case 'paper':
-        return 'You Tie! Paper vs Paper';
-      case 'scissors':
-        computerScore++;
-        return 'You Lose! Scissors beat Paper';
-    }
-  } else {
-    switch (computerSelection) {
-      case 'rock':
-        computerScore++;
-        return 'You Lose! Rock beats Scissors';
-      case 'paper':
-        playerScore++;
-        return 'You Win! Scissors beat Paper';
-      case 'scissors':
-        return 'You Tie! Scissors vs Scissors';
-    }
-  }
-}
-
-game();
+// game();
