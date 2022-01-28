@@ -1,0 +1,61 @@
+:root {
+  --clr-background: #e3ffd6;
+  --clr-btn: #b370af;
+  --clr-primary: #fcc0fa;
+}
+
+body {
+  background-color: var(--clr-background);
+  /* color: var(--clr-primary); */
+  color: rgb(78, 78, 78);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 3rem;
+}
+
+.container {
+  background: var(--clr-primary);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 20px 2px hsla(0 0% 0% / 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.result-card {
+  width: 200px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vs-sign {
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-decoration: overline underline;
+}
+
+.btn {
+  width: 7rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--clr-btn);
+  color: white;
+  /* border: 3px orange solid; */
+  border: none;
+  border-radius: 16px;
+  /* outline: none; */
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 0 0 3px var(--clr-background), 0 0 0 6px var(--clr-btn);
+}
