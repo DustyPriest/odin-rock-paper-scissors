@@ -2,12 +2,13 @@
   --clr-background: #e3ffd6;
   --clr-btn: #b370af;
   --clr-primary: #fcc0fa;
+  --clr-text: #4e4e4e;
 }
 
 body {
   background-color: var(--clr-background);
   /* color: var(--clr-primary); */
-  color: rgb(78, 78, 78);
+  color: var(--clr-text);
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -22,9 +23,63 @@ body {
   box-shadow: 3px 3px 20px 2px hsla(0 0% 0% / 0.1);
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  column-gap: 3rem;
+  row-gap: 2rem;
+}
+
+.round {
+  text-align: center;
+  width: 100%;
+}
+
+.round,
+.vs-sign {
+  font-size: 1.25rem;
+  font-weight: 900;
+  position: relative;
+}
+
+.round::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 40%;
+  width: 20%;
+  height: 2px;
+  background-color: var(--clr-text);
+}
+
+.round::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 40%;
+  width: 20%;
+  height: 2px;
+  background-color: var(--clr-text);
+}
+
+.vs-sign::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -20%;
+  width: 140%;
+  height: 2px;
+  background-color: var(--clr-text);
+}
+
+.vs-sign::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: -20%;
+  width: 140%;
+  height: 2px;
+  background-color: var(--clr-text);
 }
 
 .result-card {
@@ -35,12 +90,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-.vs-sign {
-  font-size: 1.25rem;
-  font-weight: 900;
-  text-decoration: overline underline;
 }
 
 .btn {

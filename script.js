@@ -4,8 +4,10 @@
 
 // GLOBAL VARIABLES
 let playerScore = 0,
-  compScore = 0;
+  compScore = 0,
+  currRound = 1;
 
+const currRoundEl = document.querySelector('.round');
 const playerScoreEl = document.querySelector('#player-score');
 const compScoreEl = document.querySelector('#comp-score');
 const options = document.querySelectorAll('.btn');
@@ -23,6 +25,7 @@ function pickOption(e) {
 function updateScores() {
   playerScoreEl.textContent = playerScore;
   compScoreEl.textContent = compScore;
+  currRoundEl.textContent = `Round: ${currRound}`;
 }
 
 // Check for win state
@@ -36,6 +39,7 @@ function checkWinner() {
 function resetGame() {
   playerScore = 0;
   compScore = 0;
+  currRound = 0;
   updateScores();
   commentary.textContent = '';
 }
@@ -114,6 +118,7 @@ function playRound(playerSelection) {
         resetGame();
     }
   }
+  currRound++;
 }
 
 // Game manager - Plays ROUNDS rounds
