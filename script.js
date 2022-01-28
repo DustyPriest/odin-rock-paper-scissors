@@ -10,10 +10,17 @@ let playerScore = 0,
 const currRoundEl = document.querySelector('.round');
 const playerScoreEl = document.querySelector('#player-score');
 const compScoreEl = document.querySelector('#comp-score');
-const options = document.querySelectorAll('.btn');
+const options = document.querySelectorAll('.option');
 const commentary = document.querySelector('.commentary');
+const winCurtain = document.querySelector('.win-curtain');
+const winMsg = document.querySelector('.win-msg');
+const resetBtn = document.querySelector('.reset-btn');
 
+// Player picks option
 options.forEach((option) => option.addEventListener('click', pickOption));
+
+// On "play again"
+resetBtn.addEventListener('click', resetGame);
 
 function pickOption(e) {
   playRound(e.target.id);
@@ -21,7 +28,6 @@ function pickOption(e) {
   checkWinner();
 }
 
-// Updates DOM
 function updateScores() {
   playerScoreEl.textContent = playerScore;
   compScoreEl.textContent = compScore;
@@ -31,12 +37,16 @@ function updateScores() {
 // Check for win state
 function checkWinner() {
   if (playerScore === 5 || compScore === 5) {
-    alert(`${playerScore === 5 ? 'Player' : 'Computer'} wins!`);
-    resetGame();
+    winMsg.textContent =
+      playerScore === 5
+        ? 'Congratulations, you won!'
+        : "Oh no! You've been defeated!";
+    winCurtain.style.display = 'flex';
   }
 }
 
 function resetGame() {
+  winCurtain.style.display = 'none';
   playerScore = 0;
   compScore = 0;
   currRound = 0;

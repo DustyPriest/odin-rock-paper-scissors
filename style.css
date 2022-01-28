@@ -93,18 +93,39 @@ body {
 }
 
 .btn {
-  width: 7rem;
   font-weight: 600;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 2rem;
   background-color: var(--clr-btn);
   color: white;
-  /* border: 3px orange solid; */
   border: none;
   border-radius: 16px;
-  /* outline: none; */
   cursor: pointer;
+  box-shadow: 3px 3px 30px 2px hsla(0 0% 0% / 0.1);
 }
 
 .btn:hover {
   box-shadow: 0 0 0 3px var(--clr-background), 0 0 0 6px var(--clr-btn);
+}
+
+.option {
+  width: 7rem;
+}
+
+.win-curtain {
+  position: absolute;
+  z-index: 10;
+  inset: 0 0 0 0;
+  background-color: hsla(0 0% 0% / 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.win-msg {
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+.container.win-alert {
+  flex-direction: column;
 }
